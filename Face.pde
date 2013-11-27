@@ -7,6 +7,10 @@ class Face {
   float head_height;
   float headIndexY;
   float hairX;
+  
+  float beardIndex;
+  float beard_left;
+  float beard_right;
 
   float new_head_x;
   float new_head_y;
@@ -66,13 +70,15 @@ class Face {
 
   Face (float head_x, float head_y) {  
     stroke(0);
-    //    head_x = width/2;
-    //    head_y = height/2;
 
     head_height = random(90, 120);
     //connection point between head and hair
     headIndexY = random(80, 85);
     hairX = random(10, 20);
+    
+    beardIndex = 50;
+    beard_left = new_head_x - beardIndex;
+    beard_right = new_head_x + beardIndex;
 
     // position
     l_eye_x = (head_x)-random(20, 30);
@@ -140,7 +146,7 @@ class Face {
   }
 
   // draw head with bezier curves
-  void draw_new_head(float trX, float trY) {
+  void draw_new_head(float trX, float trY, float headIndexY) {
     noFill();
     translate(trX, trY);
 
@@ -158,8 +164,8 @@ class Face {
     
     // beard
     beginShape();
-    vertex(new_head_x - 50, new_head_y + head_height);
-    bezierVertex(new_head_x, new_head_y + head_height, new_head_x + random(-20, 20), new_head_y + head_height*random(1.1, 1.5), new_head_x + 50, new_head_y + head_height);
+    vertex(beard_left, new_head_y + head_height);
+    bezierVertex(new_head_x, new_head_y + head_height, new_head_x + random(-20, 20), new_head_y + head_height*random(1.1, 1.5), beard_right, new_head_y + head_height);
     endShape();
 
     //hair
@@ -173,12 +179,7 @@ class Face {
   }
     endShape();
     resetMatrix(); 
-    //    
-    //    // beard
-    //    beginShape();
-    //    vertex(new_head_x, new_head_y + head_height);
-    //    bezierVertex(new_head_x + 10, new_head_y + head_height*0.9, new_head_x - 10, new_head_y + head_height*1.2, new_head_x, new_head_y + head_height);
-    //    endShape();
+ 
     stroke(0);
     resetMatrix();
   }

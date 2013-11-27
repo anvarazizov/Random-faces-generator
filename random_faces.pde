@@ -12,26 +12,16 @@ void setup() {
   background(255);
   smooth();
   frameRate(10);
-
-  drawNewFace2(width/2, height/2);
-//  drawNewFace2(width-distX, distY);
-//  drawNewFace2(distX, distY);
-//  drawNewFace2(width-distX, height-distY);
-//  drawNewFace2(distY, height-distY);
 }
 
 void draw() {  
+  
+}
+void mousePressed() {
   fill(255, 10);
   rect(0, 0, width, height);
   background(255);
-  drawNewFace2(width/2, height/2);
-//  drawNewFace2(width-distX, distY);
-//  drawNewFace2(distX, distY);
-//  drawNewFace2(width-distX, height-distY);
-//  drawNewFace2(distY, height-distY);
-}
-void mousePressed() {
-  
+  jonny(width/2, height/2, random(50, 100));
 }
 
 void keyPressed() {
@@ -44,24 +34,14 @@ void keyPressed() {
   }
 }
 
-// drawing more complex face with bezier curves
-void drawNewFace2(float x, float y) {
-  Face thisFace2 = new Face(x, y);
-  thisFace2.draw_new_head(x, y);
-  thisFace2.draw_eyes();
-  thisFace2.draw_nose2(x, y);
-  thisFace2.draw_mouth(x, y);
-  thisFace2.draw_ears();
-}
-
-// drawing ellipse face
-void drawNewFace3(float x, float y) {
-  Face thisFace3 = new Face(x, y);
-  thisFace3.draw_head(x, y);
-  thisFace3.draw_eyes();
-  thisFace3.draw_nose2(x, y);
-  thisFace3.draw_mouth(x, y);
-  thisFace3.draw_ears();
+// drawing complex face with bezier curves
+void jonny(float x, float y, float headIndexY) {
+  Face jonny = new Face(x, y);
+  jonny.draw_new_head(x, y, headIndexY);
+  jonny.draw_eyes();
+  jonny.draw_nose2(x, y);
+  jonny.draw_mouth(x, y);
+  jonny.draw_ears();
 }
 
 
