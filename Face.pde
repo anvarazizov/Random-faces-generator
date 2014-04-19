@@ -2,7 +2,7 @@
 
 class Face {
 
-  float head_x, head_y, head_height, headIndexY, hairX;
+  float head_x, head_y, head_height, headIndexY, hairX, moustacheX;
   float beardIndex, beard_left, beard_right;
   float new_head_x, new_head_y;
   float l_eye_x, r_eye_x, eye_y;
@@ -39,6 +39,7 @@ class Face {
     //connection point between head and hair
     headIndexY = random(80, 85);
     hairX = random(10, 20);
+    moustacheX = random(5, 15);
     
     beardIndex = 50;
     beard_left = new_head_x - beardIndex;
@@ -52,10 +53,12 @@ class Face {
     nose_x = head_x + random(-10, 10);
     nose_y = eye_y + random(30, 40);
 
-    mouth_x = new_head_x + random(-30, 5);
-    mouth_y = new_head_y + random(50, 80);
+    mouth_x = new_head_x + random(-10, 0);
+    mouth_y = new_head_y + random(56, 65);
    
     mouthIndex = random(40, 50); 
+    
+     println(mouth_x, mouth_y, mouthIndex);
     
     // ears
     l_ear_x = head_x - random(45, 47);
@@ -127,15 +130,14 @@ class Face {
     vertex(beard_left, new_head_y + head_height);
     bezierVertex(new_head_x, new_head_y + head_height, new_head_x + random(-20, 20), new_head_y + head_height*random(1.1, 1.5), beard_right, new_head_y + head_height);
     endShape();
-
+    
     //hair
     translate(-30, -headIndexY);
     beginShape();
     for(float i = 0; i < 50; i++){
       vertex(new_head_x, new_head_y);
-    bezierVertex(i + hairX, new_head_y - random(30, 50), i, new_head_y, i + hairX, new_head_y);
-    stroke(i); 
-   
+      bezierVertex(i + hairX, new_head_y - random(30, 50), i, new_head_y, i + hairX, new_head_y);
+      stroke(i); 
   }
     endShape();
     resetMatrix(); 
@@ -185,7 +187,7 @@ class Face {
     translate(trX, trY);
     beginShape();
     vertex(mouth_x, mouth_y);
-    bezierVertex(mouth_x + random(-30, 50), mouth_y*random(0.5, 1.2), mouth_x + random(20, 60), mouth_y*random(1.0, 1.8), mouth_x, mouth_y);
+    bezierVertex(mouth_x + random(-50, 50), mouth_y*random(0.8, 1.5), mouth_x + random(20, 50), mouth_y*random(0.9, 1.2), mouth_x, mouth_y);
     endShape();  
     resetMatrix();
   }
@@ -215,6 +217,31 @@ class Face {
     vertex(l_ear_x, ears_y);
     bezierVertex(x5, y5, x6, y6, x7, y7);
  
+    endShape();
+  }
+  
+  void draw_moustaches(float trX, float trY, float headIndexY){
+    noFill();
+    translate(trX, trY);
+   
+    translate(-20, random(50, 55));
+    beginShape();
+    for(float i = 0; i < random(25, 60); i+=1.5)
+    {
+      vertex(0, 0);
+      bezierVertex(i + moustacheX, 0 - random(5, 20), i, 0, i + moustacheX, 0);
+      stroke(i);  
+    }
+    endShape();
+    
+    translate(0, beardIndex);
+    beginShape();
+    for(float i = 0; i < random(30, 40); i += 3)
+    {
+      vertex(0, 0);
+      bezierVertex(i + moustacheX/2, 0 - random(10, 20), i, 0, i + moustacheX, random(0, 20));
+      stroke(i);  
+    }
     endShape();
   }
 }

@@ -12,21 +12,23 @@ void setup() {
   background(255);
   smooth();
   frameRate(10);
+  fill(255, 10);
+  rect(0, 0, width, height);
 }
 
 void draw() {  
-  
+ 
 }
 void mousePressed() {
-  fill(255, 10);
+   fill(255, 10);
   rect(0, 0, width, height);
   background(255);
-  jonny(width/2, height/2, random(50, 100));
+  jonny(width/2, height/2, random(50, 70));
 }
 
 void keyPressed() {
   if (key == 's') {
-    saveFrame("data/frame#####" + ".png");
+    saveFrame("data/frame-#####.png");
     println("image saved");
   } 
   else {
@@ -42,6 +44,7 @@ void jonny(float x, float y, float headIndexY) {
   jonny.draw_nose2(x, y);
   jonny.draw_mouth(x, y);
   jonny.draw_ears();
+  jonny.draw_moustaches(x, y, headIndexY);
 }
 
 
